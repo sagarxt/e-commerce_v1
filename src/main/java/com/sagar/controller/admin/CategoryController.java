@@ -1,4 +1,4 @@
-package com.sagar.controller;
+package com.sagar.controller.admin;
 
 import com.sagar.model.Category;
 import com.sagar.service.CategoryService;
