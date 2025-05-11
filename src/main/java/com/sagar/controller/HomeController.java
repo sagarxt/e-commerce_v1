@@ -5,6 +5,7 @@ import com.sagar.repository.UserRepository;
 import com.sagar.service.MailService;
 import com.sagar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +18,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -60,17 +64,29 @@ public class HomeController {
             redirectAttributes.addFlashAttribute("user", user);
             return "redirect:/register";
         } else {
-            String otp = "1234";
+            String otp = generateOtp();
             otpStore.put(user.getEmail(), otp);
-//            mailService.sendOtp(user.getEmail(), otp);
-            redirectAttributes.addFlashAttribute("user", user);
-            return "redirect:/otp-verification";
+            String html = loadTemplate("templates/otp-email-temp.html");
+            String body = html
+                    .replace("{{name}}", user.getName())
+                    .replace("{{otp}}", String.valueOf(otp));
+
+            boolean sent = mailService.sendMail(user.getEmail(), "OTP Verification for E-Commerce", body);
+
+            if(sent) {
+                redirectAttributes.addFlashAttribute("user", user);
+                return "redirect:/otp-verification";
+            } else {
+                redirectAttributes.addFlashAttribute("registerError", "Failed to send OTP. Please try again.");
+                redirectAttributes.addFlashAttribute("user", user);
+                return "redirect:/register";
+            }
         }
     }
 
     @GetMapping("/otp-verification")
     public String otpVerification() {
-        return "otp-verification";  // Create a otp-verification.html in templates directory
+        return "otp-verification";
     }
 
     @PostMapping("/otp-verification")
@@ -142,7 +158,19 @@ public class HomeController {
         return "redirect:/";
     }
 
+    private String generateOtp() {
+        int otp = (int) (Math.random() * 900000) + 100000;
+        return String.valueOf(otp);
+    }
 
-
+    public String loadTemplate(String path) {
+        try {
+            ClassPathResource resource = new ClassPathResource(path);
+            byte[] bytes = Files.readAllBytes(resource.getFile().toPath());
+            return new String(bytes, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load email template", e);
+        }
+    }
 
 }
