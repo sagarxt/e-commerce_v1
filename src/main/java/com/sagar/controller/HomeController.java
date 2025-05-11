@@ -75,6 +75,7 @@ public class HomeController {
 
             if(sent) {
                 redirectAttributes.addFlashAttribute("user", user);
+                redirectAttributes.addFlashAttribute("otpSent", "OTP sent to " + user.getEmail() + ", Kindly check Spam/Junk folder if not found.");
                 return "redirect:/otp-verification";
             } else {
                 redirectAttributes.addFlashAttribute("registerError", "Failed to send OTP. Please try again.");
@@ -94,8 +95,7 @@ public class HomeController {
                                   @RequestParam String otp,
                                   RedirectAttributes redirectAttributes) {
         if (otpStore.get(user.getEmail()).equals(otp)) {
-            redirectAttributes.addFlashAttribute("registerSuccess", "OTP verified successfully.");
-            System.out.println("OTP verified successfully.");
+            redirectAttributes.addFlashAttribute("registerSuccess", "OTP verified, Kindly login. ");
             userService.saveUser(user);
             return "redirect:/login";
         } else {

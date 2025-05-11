@@ -68,6 +68,9 @@
     <div th:if="${registerError}" class="alert alert-danger text-center">
         <p th:text="${registerError}"></p>
     </div>
+    <div th:if="${otpSent}" class="alert alert-success text-center">
+        <p th:text="${otpSent}"></p>
+    </div>
     <div th:if="${otpError}" class="alert alert-danger text-center">
         <p th:text="${otpError}"></p>
     </div>
