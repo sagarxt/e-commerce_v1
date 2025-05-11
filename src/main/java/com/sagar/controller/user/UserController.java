@@ -1,10 +1,8 @@
-package com.sagar.controller;
+package com.sagar.controller.user;
 
 import com.sagar.model.User;
 import com.sagar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

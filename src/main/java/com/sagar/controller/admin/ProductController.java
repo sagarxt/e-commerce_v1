@@ -1,4 +1,4 @@
-package com.sagar.controller;
+package com.sagar.controller.admin;
 
 import com.sagar.service.CategoryService;
 import com.sagar.service.ProductService;
