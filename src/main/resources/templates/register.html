@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | E-Commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Center the register form vertically */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #f8f9fa;
+        }
+        .register-container {
+            max-width: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm fixed-top">
+    <div class="container-fluid px-5">
+        <a class="navbar-brand fs-3 fw-bold" href="/">E-Commerce</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarContent"
+                aria-controls="navbarContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/products">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact</a>
+                </li>
+            </ul>
+
+            <div class="d-flex">
+                <a class="btn btn-outline-primary mx-2 fw-bold" href="/login">Login</a>
+                <a class="btn btn-primary fw-bold" href="/register">Register</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Register Form -->
+<div class="container register-container border rounded shadow p-4 bg-white mt-5">
+    <div class="text-center mb-4">
+        <h2 class="fw-bold">Register</h2>
+    </div>
+
+    <!-- Error message -->
+    <div th:if="${registerError}" class="alert alert-danger text-center">
+        <p th:text="${registerError}"></p>
+    </div>
+
+    <form th:action="@{/register}" method="post">
+        <div class="form-floating mb-3">
+            <input type="text" name="name" class="form-control" id="name" placeholder="Full Name" required th:value="${user.name}">
+            <label for="name">Full Name</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required th:value="${user.email}">
+            <label for="email">Email Address</label>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="password" name="password" class="form-control" id="password" placeholder="Password" required th:value="${user.password}">
+            <label for="password">Password</label>
+        </div>
+
+        <div class="row g-2 mb-3 align-items-center">
+            <div class="col">
+                <input type="text" class="form-control" id="otp" name="otp" placeholder="Enter OTP" disabled>
+            </div>
+
+            <div class="col-auto ms-auto">
+                <button type="submit" class="btn btn-primary" id="sendOtpBtn">Send OTP</button>
+            </div>
+        </div>
+
+
+        <button type="submit" class="btn btn-secondary w-100 fw-bold" disabled>Register</button>
+    </form>
+
+    <div class="text-center mt-3">
+        <span>Already have an account? <a href="/login" class="text-primary fw-bold">Login</a></span>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

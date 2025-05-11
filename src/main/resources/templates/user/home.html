@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <h1>User Home Page of E- SHop</h1>
+    <h2 th:text="${user.name}"></h2>
+    <h2 th:text="${user.email}"></h2>
+    <h2 th:text="${user.id}"></h2>
+</body>
+</html>
