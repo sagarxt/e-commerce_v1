@@ -9,7 +9,7 @@ public class Category {
     private String id;
     private String name;
     private String description;
-    private String imageUrl;
+    private String imageId;
     private boolean active;
 
     public String getId() {
@@ -36,12 +36,12 @@ public class Category {
         this.description = description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImageId() {
+        return imageId;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
     }
 
     public boolean isActive() {
