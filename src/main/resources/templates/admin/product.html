@@ -83,7 +83,7 @@
             <div th:each="product : ${products}" class="card-body row m-1 border-bottom border-dark align-items-center">
                 <!-- Image Section -->
                 <div class="col-2 d-flex justify-content-center">
-                    <img th:src="${product.imageUrl}" width="90" height="90" th:alt="${product.name}">
+                    <img th:src="@{'/image/' + ${product.imageUrl}}" width="90" height="90" th:alt="${product.name}">
                 </div>
 
                 <!-- Category Details Section -->

@@ -16,15 +16,15 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
 
     @Autowired
-    private FileStorageService fileStorageService;
+    private ImageService imageService;
 
     public Category saveCategory(String name, String description, MultipartFile image) throws IOException {
-        String imageUrl = fileStorageService.saveFile(image, name, "category");
+        String imageId = imageService.saveImage(image);
 
         Category category = new Category();
         category.setName(name);
         category.setDescription(description);
-        category.setImageUrl(imageUrl);
+        category.setImageId(imageId);
         category.setActive(true);
 
         return categoryRepository.save(category);
@@ -75,8 +75,8 @@ public class CategoryService {
             category.setName(name);
             category.setDescription(description);
             if(!image.isEmpty()) {
-                String imageUrl = fileStorageService.saveFile(image, name, "category");
-                category.setImageUrl(imageUrl);
+                String imageId = imageService.saveImage(image);
+                category.setImageId(imageId);
             }
             categoryRepository.save(category);
         }

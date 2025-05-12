@@ -85,7 +85,7 @@
             <div th:each="category : ${categories}" class="card-body row m-1 p-1 border-bottom border-dark align-items-center">
                 <!-- Image Section -->
                 <div class="col-2 d-flex justify-content-center">
-                    <img th:src="${category.imageUrl}" width="90" height="90" th:alt="${category.name}">
+                    <img th:src="@{'/image/' + ${category.imageId}}" width="90" height="90" th:alt="${category.name}">
                 </div>
 
                 <!-- Category Details Section -->
@@ -101,7 +101,7 @@
                     <a th:attr="data-id=${category.id},
                       data-name=${category.name},
                       data-description=${category.description},
-                      data-image-url=${category.imageUrl}"
+                      data-image-url=@{'/image/' + ${category.imageId}}"
                                class="btn btn-warning fw-bold mx-1"
                                onclick="openUpdateCategoryModal(this)">Update</a>
 

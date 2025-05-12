@@ -20,7 +20,7 @@ public class ProductDTO {
         this.id = product.getId();
         this.name = product.getName();
         this.description = product.getDescription();
-        this.imageUrl = product.getImageUrl();
+        this.imageUrl = product.getImageId();
         this.price = product.getPrice();
         this.MRP = product.getMRP();
         this.discount =  Math.round((float) (MRP-price)/MRP*100) + "% OFF";

@@ -10,7 +10,7 @@ public class Product {
     private String categoryId;
     private String name;
     private String description;
-    private String imageUrl;
+    private String imageId;
     private Double price;
     private Double MRP;
     private boolean active;
@@ -47,12 +47,12 @@ public class Product {
         this.description = description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImageId() {
+        return imageId;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
     }
 
     public Double getPrice() {
