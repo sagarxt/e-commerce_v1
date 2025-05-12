@@ -22,16 +22,16 @@ public class ProductService {
     private CategoryRepository categoryRepository;
 
     @Autowired
-    private FileStorageService fileStorageService;
+    private ImageService imageService;
 
     public Product saveProduct(String name, String description, MultipartFile image, String categoryId, Double MRP, Double price) throws IOException {
 
-        String imageUrl = fileStorageService.saveFile(image, name, "product");
+        String imageId = imageService.saveImage(image);
 
         Product product = new Product();
         product.setName(name);
         product.setDescription(description);
-        product.setImageUrl(imageUrl);
+        product.setImageId(imageId);
         product.setCategoryId(categoryId);
         product.setMRP(MRP);
         product.setPrice(price);
