@@ -150,7 +150,7 @@ public class HomeController {
             if (authority.getAuthority().equals("ROLE_ADMIN")) {
                 return "redirect:/admin";  // Redirect to admin dashboard
             } else if (authority.getAuthority().equals("ROLE_USER")) {
-                return "redirect:/user";  // Redirect to user home page
+                return "redirect:/home";  // Redirect to user home page
             }
         }
 
