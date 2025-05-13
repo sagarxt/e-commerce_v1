@@ -7,7 +7,7 @@ public class ProductDTO {
     private String id;
     private String name;
     private String description;
-    private String imageUrl;
+    private String imageId;
     private Double price;
     private Double MRP;
     private String categoryId;
@@ -20,7 +20,7 @@ public class ProductDTO {
         this.id = product.getId();
         this.name = product.getName();
         this.description = product.getDescription();
-        this.imageUrl = product.getImageId();
+        this.imageId = product.getImageId();
         this.price = product.getPrice();
         this.MRP = product.getMRP();
         this.discount =  Math.round((float) (MRP-price)/MRP*100) + "% OFF";
@@ -51,12 +51,12 @@ public class ProductDTO {
         this.description = description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImageId() {
+        return imageId;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
     }
 
     public Double getPrice() {

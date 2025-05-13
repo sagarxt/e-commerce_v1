@@ -10,7 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -87,5 +89,11 @@ public class ProductService {
             product.setActive(true);
             productRepository.save(product);
         }
+    }
+
+    public List<Product> getRandomProducts(int limit) {
+        List<Product> allProducts = productRepository.findAll();
+        Collections.shuffle(allProducts);
+        return allProducts.stream().limit(limit).collect(Collectors.toList());
     }
 }

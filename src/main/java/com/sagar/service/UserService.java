@@ -14,6 +14,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private CartService cartService;
+
+    @Autowired
+    private WishlistService wishlistService;
+
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
@@ -29,7 +35,10 @@ public class UserService {
     public void saveUser(User user) {
         user.setRole("USER");
         user.setActive(true);
-        userRepository.save(user);
+        User savedUser = userRepository.save(user);
+
+        cartService.createCart(savedUser.getId());
+        wishlistService.createWishlist(savedUser.getId());
     }
 
     public User getLoggedInUser() {
