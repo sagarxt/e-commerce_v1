@@ -37,7 +37,7 @@ public class UserController {
         model.addAttribute("userId", user.getId());
         model.addAttribute("name", user.getName());
         model.addAttribute("cartCount", cartService.getCart(user.getId()).getItems().size());
-        model.addAttribute("products", productService.getRandomProducts(10)); // limit 10 random
+        model.addAttribute("featuredProducts", productService.getRandomProducts(10)); // limit 10 random
         model.addAttribute("categories", categoryService.getCategories());
 
         return "user/home";
