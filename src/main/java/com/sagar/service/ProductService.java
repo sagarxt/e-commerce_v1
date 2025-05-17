@@ -54,8 +54,7 @@ public class ProductService {
         List<Product> products = productRepository.findByActive(true);
         List<ProductDTO> productDTOs = new ArrayList<>();
         for(Product product : products) {
-            ProductDTO productDTO = new ProductDTO(product);
-            productDTO.setCategory(categoryRepository.findById(product.getCategoryId()).get().getName());
+            ProductDTO productDTO = getProductDTO(product);
             productDTOs.add(productDTO);
         }
 
@@ -66,8 +65,7 @@ public class ProductService {
         List<Product> products = productRepository.findByActive(false);
         List<ProductDTO> productDTOs = new ArrayList<>();
         for(Product product : products) {
-            ProductDTO productDTO = new ProductDTO(product);
-            productDTO.setCategory(categoryRepository.findById(product.getCategoryId()).get().getName());
+            ProductDTO productDTO = getProductDTO(product);
             productDTOs.add(productDTO);
         }
 
@@ -91,9 +89,22 @@ public class ProductService {
         }
     }
 
-    public List<Product> getRandomProducts(int limit) {
+    public List<ProductDTO> getRandomProducts(int limit) {
         List<Product> allProducts = productRepository.findAll();
         Collections.shuffle(allProducts);
-        return allProducts.stream().limit(limit).collect(Collectors.toList());
+        List<Product> randomProducts = allProducts.stream().limit(limit).collect(Collectors.toList());
+        List<ProductDTO> productDTOs = new ArrayList<>();
+        for(Product product : randomProducts) {
+            ProductDTO productDTO = getProductDTO(product);
+            productDTOs.add(productDTO);
+        }
+
+        return productDTOs;
+    }
+
+    private ProductDTO getProductDTO(Product product) {
+        ProductDTO productDTO = new ProductDTO(product);
+        productDTO.setCategory(categoryRepository.findById(product.getCategoryId()).get().getName());
+        return productDTO;
     }
 }
